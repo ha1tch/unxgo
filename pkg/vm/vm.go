@@ -7,7 +7,7 @@ func NewUxn() *Uxn {
 
 // Eval executes the Uxn virtual machine starting from the given program counter
 func (u *Uxn) Eval(pc uint16) bool {
-	if pc == 0 || u.dev[0x0f] != 0 {
+	if pc == 0 || u.Dev[0x0f] != 0 {
 		return false
 	}
 
@@ -15,7 +15,7 @@ func (u *Uxn) Eval(pc uint16) bool {
 	for step > 0 {
 		step--
 		
-		instr := u.ram[pc]
+		instr := u.Ram[pc]
 		pc++
 
 		switch instr {
@@ -24,14 +24,14 @@ func (u *Uxn) Eval(pc uint16) bool {
 
 		case 0x20: // JCI
 			if u.wst.dec() != 0 {
-				a := uint16(u.ram[pc])<<8 | uint16(u.ram[pc+1])
+				a := uint16(u.Ram[pc])<<8 | uint16(u.Ram[pc+1])
 				pc += a + 2
 			} else {
 				pc += 2
 			}
 
 		case 0x40: // JMI
-			a := uint16(u.ram[pc])<<8 | uint16(u.ram[pc+1])
+			a := uint16(u.Ram[pc])<<8 | uint16(u.Ram[pc+1])
 			pc += a + 2
 
 		case 0x60: // JSI
@@ -40,32 +40,32 @@ func (u *Uxn) Eval(pc uint16) bool {
 			u.rst.ptr++
 			u.rst.dat[u.rst.ptr] = uint8(c)
 			u.rst.ptr++
-			a := uint16(u.ram[pc])<<8 | uint16(u.ram[pc+1])
+			a := uint16(u.Ram[pc])<<8 | uint16(u.Ram[pc+1])
 			pc += a + 2
 
 		case 0x80: // LIT
-			u.wst.dat[u.wst.ptr] = u.ram[pc]
+			u.wst.dat[u.wst.ptr] = u.Ram[pc]
 			u.wst.ptr++
 			pc++
 
 		case 0xa0: // LI2
-			u.wst.dat[u.wst.ptr] = u.ram[pc]
+			u.wst.dat[u.wst.ptr] = u.Ram[pc]
 			u.wst.ptr++
 			pc++
-			u.wst.dat[u.wst.ptr] = u.ram[pc]
+			u.wst.dat[u.wst.ptr] = u.Ram[pc]
 			u.wst.ptr++
 			pc++
 
 		case 0xc0: // LIr
-			u.rst.dat[u.rst.ptr] = u.ram[pc]
+			u.rst.dat[u.rst.ptr] = u.Ram[pc]
 			u.rst.ptr++
 			pc++
 
 		case 0xe0: // L2r
-			u.rst.dat[u.rst.ptr] = u.ram[pc]
+			u.rst.dat[u.rst.ptr] = u.Ram[pc]
 			u.rst.ptr++
 			pc++
-			u.rst.dat[u.rst.ptr] = u.ram[pc]
+			u.rst.dat[u.rst.ptr] = u.Ram[pc]
 			u.rst.ptr++
 			pc++
 

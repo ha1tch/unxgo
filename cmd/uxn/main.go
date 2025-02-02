@@ -10,7 +10,7 @@ import (
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Printf("usage: %s file.rom [args..]\n", os.Args[0])
-		return
+		returns
 	}
 
 	machine := vm.NewUxn()
