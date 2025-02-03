@@ -4,6 +4,10 @@ UxnGo is a Go implementation of the Uxn virtual machine. Uxn is a minimalist sta
 
 With many thanks to [Hundred Rabbits](https://100r.co/site/uxn.html) for their inspiring, delicate, and beautifully precise work.
 
+## Status
+
+Rough around the edges, buggy, and incomplete at this time. May not even build some days. My goal is to understand unx and devices attached to it well enough that I can later re-implement it for other smaller systems.
+
 ## Overview
 
 The Uxn virtual machine is a stack-based computer with the following characteristics:
@@ -51,8 +55,9 @@ uxngo/
 3. Build the project:
    ```bash
    cd uxngo
-   go build ./cmd/uxn
+   ./mk.sh
    ```
+   Binaries for various platforms will be placed in ./bin
 
 ## Usage
 
@@ -122,9 +127,9 @@ The implementation includes basic device support:
 
 
 ## License
-MIT License
-https://github.com/ha1tch/unxgo/blob/main/LICENSE
-(For compatibility with the original uxn)
+  MIT License
+  https://github.com/ha1tch/unxgo/blob/main/LICENSE
+  (For compatibility with the original uxn)
 
 ## Acknowledgments
 
